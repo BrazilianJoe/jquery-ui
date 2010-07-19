@@ -111,25 +111,27 @@ test('select', function() {
 
 	el.tabs('destroy');
 	el.tabs({ collapsible: true });
-	el.tabs('select', -1);
-	equals(el.tabs('option', 'selected'), -1, 'should collapse tab passing in -1');
+	el.tabs('select', NaN);
+	equals(el.tabs('option', 'selected'), -1, 'should collapse tab passing in NaN');
 
 	el.tabs('destroy');
 	el.tabs({ collapsible: true });
-	el.tabs('select', null);
-	equals(el.tabs('option', 'selected'), -1, 'should collapse tab passing in null (deprecated)');
-	el.tabs('select', null);
-	equals(el.tabs('option', 'selected'), -1, 'should not select tab passing in null a second time (deprecated)');
+	el.tabs('select');
+	equals(el.tabs('option', 'selected'), -1, 'should collapse tab passing no argument');
+	el.tabs('select');
+	equals(el.tabs('option', 'selected'), -1, 'should not select tab passing in null a second time');
 
 	el.tabs('destroy');
 	el.tabs();
 	el.tabs('select', 0);
 	equals(el.tabs('option', 'selected'), 0, 'should not collapse tab if collapsible is not set to true');
-	el.tabs('select', -1);
+	el.tabs('select', NaN);
 	equals(el.tabs('option', 'selected'), 0, 'should not collapse tab if collapsible is not set to true');
-	el.tabs('select', null);
+	el.tabs('select');
 	equals(el.tabs('option', 'selected'), 0, 'should not collapse tab if collapsible is not set to true');
-
+	
+	el.tabs('destroy');
+	el.tabs();
 	el.tabs('select', '#fragment-2');
 	equals(el.tabs('option', 'selected'), 1, 'should select tab by id');
 });

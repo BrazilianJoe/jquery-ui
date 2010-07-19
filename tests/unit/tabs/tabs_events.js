@@ -6,7 +6,18 @@
 module("tabs: events");
 
 test('select', function() {
-	ok(false, "missing test - untested code is broken code.");
+	expect(4);
+	var uiObj;
+	el = $('#tabs1').tabs({
+		select: function(event, ui) {
+			uiObj = ui;
+		}
+	});
+	el.tabs('select',1);
+	ok(uiObj !== undefined, 'trigger callback after initialization');
+	equals(uiObj.tab, $('a', el)[1], 'contain tab as DOM anchor element');
+	equals(uiObj.panel, $('div', el)[1], 'contain panel as DOM div element');
+	equals(uiObj.index, 1, 'contain index');
 });
 
 test('load', function() {
